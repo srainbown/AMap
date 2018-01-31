@@ -7,10 +7,9 @@
 //
 
 #import "ASingleLocationViewController.h"
-#import "ASingleMapViewController.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-@interface ASingleLocationViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ASingleLocationViewController ()<UITableViewDataSource>
 
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,16 +24,28 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = C1;
     self.navigationItem.title = @"单次定位";
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStyleDone target:self action:@selector(refreshBtnClick)];
+
     [self getLocationData];
-    [self showUI];
+    [self refreshBtnClick];
 }
+
 #pragma mark -- 懒加载
 -(NSMutableArray *)dataArray{
     if (_dataArray == nil) {
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+-(UITableView *)tableView{
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, K_Width, K_Height) style:UITableViewStylePlain];
+        [self.view addSubview:_tableView];
+        _tableView.dataSource = self;
+        UIView *footView = [[UIView alloc]init];
+        _tableView.tableFooterView = footView;
+    }
+    return _tableView;
 }
 
 -(void)getLocationData{
@@ -46,7 +57,11 @@
     self.locationManager.locationTimeout = 2;
     //逆地理请求超时时间，最低2s
     self.locationManager.reGeocodeTimeout = 2;
-    
+}
+
+-(void)refreshBtnClick{
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
     //带逆地理（坐标和地址信息），将YES改为NO，则不会返回地址信息
     [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         
@@ -56,10 +71,11 @@
                 return;
             }
         }
-//        NSLog(@"location:%@", location);
+        //        NSLog(@"location:%@", location);
+        [self.dataArray addObject:[NSString stringWithFormat:@"纬度:%.2f,经度:%.2f",location.coordinate.latitude,location.coordinate.longitude]];
         
         if (regeocode){
-//            NSLog(@"reGeocode:%@", regeocode);
+            //            NSLog(@"reGeocode:%@", regeocode);
             
             [self.dataArray addObject:[NSString stringWithFormat:@"地址:%@",regeocode.formattedAddress]];
             [self.dataArray addObject:[NSString stringWithFormat:@"国家:%@",regeocode.country]];
@@ -76,15 +92,6 @@
             [self.tableView reloadData];
         }
     }];
-}
-
--(void)showUI{
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, K_Width, K_Height) style:UITableViewStylePlain];
-    [self.view addSubview:self.tableView];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    UIView *footView = [[UIView alloc]init];
-    self.tableView.tableFooterView = footView;
 }
 
 #pragma mark -- UITableViewDataSource
@@ -109,12 +116,5 @@
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
-
-#pragma mark -- UITableViewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ASingleMapViewController *vc = [[ASingleMapViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 @end
