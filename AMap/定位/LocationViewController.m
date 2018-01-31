@@ -33,7 +33,7 @@
 #pragma mark -- 懒加载
 -(UITableView *)LocationTableView{
     if (_LocationTableView == nil) {
-        _LocationTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, K_Width, K_Height - 49 - 100) style:UITableViewStylePlain];
+        _LocationTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, K_Width, K_Height) style:UITableViewStylePlain];
         _LocationTableView.delegate = self;
         _LocationTableView.dataSource = self;
         _LocationTableView.backgroundColor = C1;

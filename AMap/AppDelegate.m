@@ -10,7 +10,8 @@
 #import "LocationViewController.h"
 #import "MapViewController.h"
 #import "NaviViewController.h"
-
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface AppDelegate ()
 
@@ -18,9 +19,12 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //开启https功能，添加在配置key之前
+    [[AMapServices sharedServices] setEnableHTTPS:YES];
+    [AMapServices sharedServices].apiKey = @"b28d708b4afc356a089dd5b369a3e368";
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];

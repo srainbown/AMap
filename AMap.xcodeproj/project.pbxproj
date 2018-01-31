@@ -19,6 +19,7 @@
 		42495B9C2021AAAE00102967 /* ASingleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42495B9B2021AAAE00102967 /* ASingleLocationViewController.m */; };
 		42495B9F2021AABC00102967 /* BackgroundLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42495B9E2021AABC00102967 /* BackgroundLocationViewController.m */; };
 		42495BA22021AAC700102967 /* ContinuousLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42495BA12021AAC700102967 /* ContinuousLocationViewController.m */; };
+		42495BA52021C3FE00102967 /* ASingleMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42495BA42021C3FE00102967 /* ASingleMapViewController.m */; };
 		ECA0869FD5857C07E2516CC5 /* libPods-AMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354BF8508F20FB77B7ED8CA2 /* libPods-AMap.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		42495B9E2021AABC00102967 /* BackgroundLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundLocationViewController.m; sourceTree = "<group>"; };
 		42495BA02021AAC700102967 /* ContinuousLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContinuousLocationViewController.h; sourceTree = "<group>"; };
 		42495BA12021AAC700102967 /* ContinuousLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContinuousLocationViewController.m; sourceTree = "<group>"; };
+		42495BA32021C3FE00102967 /* ASingleMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASingleMapViewController.h; sourceTree = "<group>"; };
+		42495BA42021C3FE00102967 /* ASingleMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASingleMapViewController.m; sourceTree = "<group>"; };
 		9715E3B481B28B5CA59FD46A /* Pods-AMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMap/Pods-AMap.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BAC4C04D24A566A77EBFD7 /* Pods-AMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-AMap/Pods-AMap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +189,8 @@
 				42495B982021AA9B00102967 /* LocationViewController.m */,
 				42495B9A2021AAAE00102967 /* ASingleLocationViewController.h */,
 				42495B9B2021AAAE00102967 /* ASingleLocationViewController.m */,
+				42495BA32021C3FE00102967 /* ASingleMapViewController.h */,
+				42495BA42021C3FE00102967 /* ASingleMapViewController.m */,
 				42495B9D2021AABC00102967 /* BackgroundLocationViewController.h */,
 				42495B9E2021AABC00102967 /* BackgroundLocationViewController.m */,
 				42495BA02021AAC700102967 /* ContinuousLocationViewController.h */,
@@ -410,6 +415,7 @@
 				42495B6A2021AA0600102967 /* main.m in Sources */,
 				42495B5C2021AA0600102967 /* AppDelegate.m in Sources */,
 				42495B992021AA9B00102967 /* LocationViewController.m in Sources */,
+				42495BA52021C3FE00102967 /* ASingleMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
