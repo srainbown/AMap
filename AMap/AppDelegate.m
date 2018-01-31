@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "LocationViewController.h"
+#import "MapViewController.h"
+#import "NaviViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -17,6 +21,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window makeKeyAndVisible];
+    
+    LocationViewController *LocationVc = [[LocationViewController alloc]init];
+    UINavigationController *LocationNavi = [[UINavigationController alloc]initWithRootViewController:LocationVc];
+    LocationVc.navigationItem.title = @"定位";
+    LocationVc.tabBarItem.title = @"定位";
+    LocationVc.tabBarItem.image = [[UIImage imageNamed:@"nav_icon_discover_normal"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    LocationVc.tabBarItem.selectedImage = [[UIImage imageNamed:@"nav_icon_discover_active"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    MapViewController *mapVc = [[MapViewController alloc]init];
+    UINavigationController *mapNavi = [[UINavigationController alloc]initWithRootViewController:mapVc];
+    mapVc.navigationItem.title = @"地图";
+    mapVc.tabBarItem.title = @"地图";
+    mapVc.tabBarItem.image = [[UIImage imageNamed:@"nav_icon_home_normal"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    mapVc.tabBarItem.selectedImage = [[UIImage imageNamed:@"nav_icon_home_active"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    NaviViewController *naviVc = [[NaviViewController alloc]init];
+    UINavigationController *naviNavi = [[UINavigationController alloc]initWithRootViewController:naviVc];
+    naviVc.navigationItem.title = @"导航";
+    naviVc.tabBarItem.title = @"导航";
+    naviVc.tabBarItem.image = [[UIImage imageNamed:@"tabBar_me_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    naviVc.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabBar_me_click_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UITabBarController *tabBar = [[UITabBarController alloc]init];
+    tabBar.viewControllers = @[LocationNavi,mapNavi,naviNavi];
+    self.window.rootViewController = tabBar;
+
     return YES;
 }
 
