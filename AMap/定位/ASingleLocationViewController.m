@@ -9,7 +9,7 @@
 #import "ASingleLocationViewController.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-@interface ASingleLocationViewController ()<UITableViewDataSource>
+@interface ASingleLocationViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -39,9 +39,10 @@
 }
 -(UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, K_Width, K_Height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
         [self.view addSubview:_tableView];
         _tableView.dataSource = self;
+        _tableView.delegate = self;
         UIView *footView = [[UIView alloc]init];
         _tableView.tableFooterView = footView;
     }
@@ -92,11 +93,9 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
-}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"cellID";
+    static NSString *cellID = @"aingCellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
@@ -111,5 +110,9 @@
     return cell;
 }
 
+#pragma mark -- UITableViewDelegate
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
 
 @end

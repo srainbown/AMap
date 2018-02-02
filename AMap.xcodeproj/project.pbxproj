@@ -283,6 +283,11 @@
 					42495B562021AA0600102967 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					42495B6E2021AA0600102967 = {
 						CreatedOnToolsVersion = 9.2;
