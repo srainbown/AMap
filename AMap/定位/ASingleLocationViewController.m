@@ -62,6 +62,7 @@
 -(void)refreshBtnClick{
     [self.dataArray removeAllObjects];
     [self.tableView reloadData];
+    
     //带逆地理（坐标和地址信息），将YES改为NO，则不会返回地址信息
     [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         
@@ -71,27 +72,20 @@
                 return;
             }
         }
-        //        NSLog(@"location:%@", location);
         [self.dataArray addObject:[NSString stringWithFormat:@"纬度:%.2f,经度:%.2f",location.coordinate.latitude,location.coordinate.longitude]];
-        
         if (regeocode){
-            //            NSLog(@"reGeocode:%@", regeocode);
-            
-            [self.dataArray addObject:[NSString stringWithFormat:@"地址:%@",regeocode.formattedAddress]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"国家:%@",regeocode.country]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"省份:%@",regeocode.province]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"城市:%@",regeocode.city]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"城区:%@",regeocode.district]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"街道:%@",regeocode.street]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"门牌号:%@",regeocode.number]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"POIName:%@",regeocode.POIName]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"AOIName:%@",regeocode.AOIName]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"区号:%@",regeocode.citycode]];
-            [self.dataArray addObject:[NSString stringWithFormat:@"邮编:%@",regeocode.adcode]];
+            NSArray *nameArray = @[@"地址", @"国家", @"省份", @"城市", @"城区", @"街道", @"门牌号", @"POIName", @"AOIName", @"区号", @"邮编"]; 
+            NSArray *valueArray = @[regeocode.formattedAddress, regeocode.country, regeocode.province, regeocode.city, regeocode.district, regeocode.street, regeocode.number, regeocode.POIName, regeocode.AOIName, regeocode.citycode, regeocode.adcode];
+            for (int i = 0 ; i < nameArray.count; i++) {
+                if (valueArray.count > i) {
+                    [self.dataArray addObject:[NSString stringWithFormat:@"%@:%@",nameArray[i],valueArray[i]]];
+                }
+            }
             //刷新列表
             [self.tableView reloadData];
         }
     }];
+    
 }
 
 #pragma mark -- UITableViewDataSource
@@ -116,5 +110,6 @@
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
+
 
 @end
