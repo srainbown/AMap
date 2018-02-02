@@ -23,7 +23,7 @@
     self.view.backgroundColor = C1;
     self.navigationItem.title = @"导航";
     
-    self.mapView = [[MAMapView alloc]initWithFrame:self.view.bounds];
+    self.mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 64, K_Width, K_Height - 64 - 49)];
     [self.view addSubview:self.mapView];
     //显示定位小蓝点
     self.mapView.showsUserLocation = YES;
